@@ -1,26 +1,48 @@
-DAY = $(shell printf '%02d' ${day})
+DAY = $(shell date +%d)
+DAY_NUM = $(shell printf '%02d' $(DAY))
+DAY_NAME = day$(DAY_NUM)
+
 BUILD_DIR := ./bin
 SOURCE_DIR := ./src
 
-CPPSTD := -std=c++17
-CPPFLAGS := -Wpedantic -Wall -Wextra -Wformat -Werror
+CPP_STD := -std=c++17
+CPP_FLAGS := -Wpedantic -Wall -Wextra -Wformat -Werror
+
 
 .PHONY: all
 all: build run
 
-.PHONY: run
-run:
-	${BUILD_DIR}/day${DAY}
+.PHONY: day
+.SILENT: day
+day:
+	echo "*** Day $(DAY) ***"
+
+.PHONY: scaffold
+scaffold: day
+	@mkdir -p $(SOURCE_DIR)/$(DAY_NAME)
+
+	@aoc download \
+	--day $(DAY) \
+	--input-file $(SOURCE_DIR)/$(DAY_NAME)/input.txt \
+	--puzzle-file $(SOURCE_DIR)/$(DAY_NAME)/$(DAY_NAME).md \
+	--overwrite
+
+	touch $(SOURCE_DIR)/$(DAY_NAME)/$(DAY_NAME).cpp
 
 .PHONY: build
-build:
-	mkdir -p ${BUILD_DIR}
+.SILENT: build
+build: day
+	mkdir -p $(BUILD_DIR)
 
-	g++ ${CPPSTD} ${CPPFLAGS} \
-	-o ${BUILD_DIR}/day${DAY} \
-	${SOURCE_DIR}/day${DAY}.cpp
+	g++ $(CPP_STD) $(CPP_FLAGS) \
+	-o $(BUILD_DIR)/$(DAY_NAME) \
+	$(SOURCE_DIR)/$(DAY_NAME)/$(DAY_NAME).cpp
 
+.PHONY: run
+.SILENT: run
+run: day
+	$(BUILD_DIR)/$(DAY_NAME)
 
 .PHONY: clean
-clean: # Cleans the build directory
-	rm -rf build/*
+clean:
+	rm -rf $(BUILD_DIR)/*
