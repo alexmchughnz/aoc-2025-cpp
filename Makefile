@@ -27,7 +27,7 @@ scaffold: day
 	--puzzle-file $(SOURCE_DIR)/$(DAY_NAME)/$(DAY_NAME).md \
 	--overwrite
 
-	touch $(SOURCE_DIR)/$(DAY_NAME)/$(DAY_NAME).cpp
+	cp $(SOURCE_DIR)/template.cpp $(SOURCE_DIR)/$(DAY_NAME)/$(DAY_NAME).cpp
 
 .PHONY: build
 .SILENT: build
