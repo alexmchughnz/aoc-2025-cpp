@@ -36,6 +36,7 @@ build: day
 
 	g++ $(CPP_STD) $(CPP_FLAGS) \
 	-o $(BUILD_DIR)/$(DAY_NAME) \
+	-D DAY_NAME=\"$(DAY_NAME)\" \
 	$(SOURCE_DIR)/$(DAY_NAME)/$(DAY_NAME).cpp
 
 .PHONY: run
