@@ -9,11 +9,13 @@ constexpr auto file = INPUT_FILE_PATH;
 
 int part_one(std::ifstream input)
 {
+    (void)input;
     return 0;
 }
 
 int part_two(std::ifstream input)
 {
+    (void)input;
     return 0;
 }
 
