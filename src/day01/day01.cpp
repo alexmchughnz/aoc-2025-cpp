@@ -51,8 +51,49 @@ int part_one(std::ifstream input)
 
 int part_two(std::ifstream input)
 {
-    (void)input;
-    return 0;
+    int num_clicks = 0;
+    int number = INITIAL_NUMBER;
+
+    std::string line;
+    while (input >> line)
+    {
+        const char direction = line[0];
+        const int rotation = std::stoi(line.substr(1));
+
+        int sign = 0;
+        switch (direction)
+        {
+        case 'L':
+            sign = -1;
+            break;
+        case 'R':
+            sign = +1;
+            break;
+        default:
+            assert(false);
+        }
+
+        for (int i = 0; i < rotation; i++)
+        {
+            number += 1 * sign;
+
+            if (number < 0)
+            {
+                number = MAXIMUM_NUMBER;
+            }
+            else if (number > MAXIMUM_NUMBER)
+            {
+                number = 0;
+            }
+
+            if (number == 0)
+            {
+                num_clicks++;
+            }
+        }
+    }
+
+    return num_clicks;
 }
 
 int main()
