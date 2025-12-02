@@ -5,8 +5,6 @@
 
 #include "../helpers.hpp"
 
-constexpr auto file = INPUT_FILE_PATH;
-
 constexpr int INITIAL_NUMBER = 50;
 constexpr int MAXIMUM_NUMBER = 99;
 
@@ -59,7 +57,7 @@ int part_two(std::ifstream input)
 
 int main()
 {
-    std::cout << "Part One: " << part_one(std::ifstream(file)) << std::endl;
-    std::cout << "Part Two: " << part_two(std::ifstream(file)) << std::endl;
+    std::cout << "Part One: " << part_one(std::ifstream(INPUT_FILE)) << std::endl;
+    std::cout << "Part Two: " << part_two(std::ifstream(INPUT_FILE)) << std::endl;
     return 0;
 }

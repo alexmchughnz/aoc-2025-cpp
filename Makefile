@@ -2,12 +2,15 @@ DAY = $(shell date +%d)
 DAY_NUM = $(shell printf '%02d' $(DAY))
 DAY_NAME = day$(DAY_NUM)
 
+EXAMPLE = false
+
 BUILD_DIR := ./bin
 SOURCE_DIR := ./src
 
-CPP_STD := -std=c++17
-CPP_FLAGS := -Wpedantic -Wall -Wextra -Wformat -Werror
-
+CPPSTD := -std=c++17
+CXXFLAGS := -Wpedantic -Wall -Wextra -Wformat -Werror
+CPPFLAGS := -D DAY_NAME=\"$(DAY_NAME)\" \
+			-D EXAMPLE=$(EXAMPLE) \
 
 .PHONY: all
 all: build run
@@ -34,9 +37,8 @@ scaffold: day
 build: day
 	mkdir -p $(BUILD_DIR)
 
-	g++ $(CPP_STD) $(CPP_FLAGS) \
+	g++ $(CPPSTD) $(CPPFLAGS) $(CXXFLAGS) \
 	-o $(BUILD_DIR)/$(DAY_NAME) \
-	-D DAY_NAME=\"$(DAY_NAME)\" \
 	$(SOURCE_DIR)/$(DAY_NAME)/$(DAY_NAME).cpp
 
 .PHONY: run
