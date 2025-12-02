@@ -31,6 +31,7 @@ scaffold: day
 	--overwrite
 
 	cp $(SOURCE_DIR)/template.cpp $(SOURCE_DIR)/$(DAY_NAME)/$(DAY_NAME).cpp
+	touch $(SOURCE_DIR)/$(DAY_NAME)/example.txt
 
 .PHONY: build
 .SILENT: build
