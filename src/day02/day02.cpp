@@ -5,13 +5,49 @@
 
 #include "../helpers.hpp"
 
-int part_one(std::ifstream input)
+bool is_invalid(const std::string &str)
 {
-    (void)input;
-    return 0;
+    if (str.length() % 2 != 0)
+    {
+        return false;
+    }
+
+    size_t half_len = str.length()/2;
+    auto s1 = str.substr(0, half_len);
+    auto s2 = str.substr(half_len, half_len);
+
+    // std::cout << s1 << "|" << s2 << std::endl;
+
+    return (s1 == s2);
 }
 
-int part_two(std::ifstream input)
+long part_one(std::ifstream input)
+{
+    long sum = 0;
+
+    std::string line;
+    while (std::getline(input, line, ','))
+    {
+        size_t dash_index = line.find('-');
+        std::cout << line << std::endl;
+        long first_id = std::stol(line.substr(0, dash_index));
+        long last_id = std::stol(line.substr(dash_index+1));
+        std::cout << "Searching range " << first_id << " to " << last_id << std::endl;
+        for (long id = first_id; id <= last_id; id++)
+        {
+            std::string id_str = std::to_string(id);
+            if (is_invalid(id_str))
+            {
+                std::cout << "Invalid id! " << id << std::endl;
+                sum += id;
+            }
+        }
+    }
+
+    return sum;
+}
+
+long part_two(std::ifstream input)
 {
     (void)input;
     return 0;
@@ -19,8 +55,8 @@ int part_two(std::ifstream input)
 
 int main()
 {
-    const int answer_one = part_one(std::ifstream(INPUT_FILE));
-    const int answer_two = part_two(std::ifstream(INPUT_FILE));
+    const long answer_one = part_one(std::ifstream(INPUT_FILE));
+    const long answer_two = part_two(std::ifstream(INPUT_FILE));
 
     std::cout << "\nPart One: " <<  answer_one << std::endl;
     std::cout << "\nPart Two: " <<  answer_two << std::endl;
