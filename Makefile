@@ -20,16 +20,19 @@ all: build run
 day:
 	echo "*** Day $(DAY) ***"
 
-.PHONY: scaffold
-scaffold: day
-	@mkdir -p $(SOURCE_DIR)/$(DAY_NAME)
+.PHONY: update
+.SILENT: update
+update: day
+	mkdir -p $(SOURCE_DIR)/$(DAY_NAME)
 
-	@aoc download \
+	aoc download \
 	--day $(DAY) \
 	--input-file $(SOURCE_DIR)/$(DAY_NAME)/input.txt \
 	--puzzle-file $(SOURCE_DIR)/$(DAY_NAME)/$(DAY_NAME).md \
 	--overwrite
 
+.PHONY: scaffold
+scaffold: update
 	cp $(SOURCE_DIR)/template.cpp $(SOURCE_DIR)/$(DAY_NAME)/$(DAY_NAME).cpp
 	touch $(SOURCE_DIR)/$(DAY_NAME)/example.txt
 
