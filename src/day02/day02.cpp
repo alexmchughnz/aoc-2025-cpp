@@ -19,7 +19,10 @@ int part_two(std::ifstream input)
 
 int main()
 {
-    std::cout << "Part One: " << part_one(std::ifstream(INPUT_FILE)) << std::endl;
-    std::cout << "Part Two: " << part_two(std::ifstream(INPUT_FILE)) << std::endl;
+    const int answer_one = part_one(std::ifstream(INPUT_FILE));
+    const int answer_two = part_two(std::ifstream(INPUT_FILE));
+
+    std::cout << "\nPart One: " <<  answer_one << std::endl;
+    std::cout << "\nPart Two: " <<  answer_two << std::endl;
     return 0;
 }
