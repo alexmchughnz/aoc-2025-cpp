@@ -22,7 +22,7 @@ int main()
     const int answer_one = part_one(std::ifstream(INPUT_FILE));
     const int answer_two = part_two(std::ifstream(INPUT_FILE));
 
-    std::cout << "\nPart One: " <<  answer_one << std::endl;
-    std::cout << "\nPart Two: " <<  answer_two << std::endl;
+    std::cout << "\nPart One: " << answer_one << std::endl;
+    std::cout << "\nPart Two: " << answer_two << std::endl;
     return 0;
 }
